@@ -1,0 +1,119 @@
+student@Ubuntu-MySQL-VirtualBox:~$ cat > 'Домашние животные'
+Собаки
+Кошки
+Хомяки
+^C
+student@Ubuntu-MySQL-VirtualBox:~$ cat > 'Вьючные животные'
+Лошади
+Верблюды
+Ослы
+^C
+student@Ubuntu-MySQL-VirtualBox:~$ cat 'Домашние животные' 'Вьючные животные' > Животные
+student@Ubuntu-MySQL-VirtualBox:~$ cat Животные
+Собаки
+Кошки
+Хомяки
+Лошади
+Верблюды
+Ослы
+student@Ubuntu-MySQL-VirtualBox:~$ mv Животные 'Друзья человека'
+student@Ubuntu-MySQL-VirtualBox:~$ mkdir Animals
+student@Ubuntu-MySQL-VirtualBox:~$ mv 'Друзья человека' Animals/
+student@Ubuntu-MySQL-VirtualBox:~$ ls
+1]                    examples.desktop  test.txt          Документы          Изображения    Рабочий стол
+Animals               HW1               Видео             Домашние животные  Музыка         Шаблоны
+docker-mount-example  script.sh         Вьючные животные  Загрузки           Общедоступные
+student@Ubuntu-MySQL-VirtualBox:~$ tree
+.
+├── 1]
+├── Animals
+│   └── Друзья человека
+├── docker-mount-example
+│   └── test.txt
+├── examples.desktop
+├── HW1
+│   ├── bin
+│   │   └── bash
+│   ├── lib
+│   │   ├── libc.so.6
+│   │   ├── libdl.so.2
+│   │   └── libtinfo.so.5
+│   └── lib64
+│       └── ld-linux-x86-64.so.2
+├── script.sh
+├── test.txt
+├── Видео
+├── Вьючные животные
+├── Документы
+├── Домашние животные
+├── Загрузки
+├── Изображения
+├── Музыка
+├── Общедоступные
+├── Рабочий стол
+└── Шаблоны
+
+14 directories, 13 files
+student@Ubuntu-MySQL-VirtualBox:~$ wget https://dev.mysql.com/get/mysql-apt-config_0.8.24-1_all.deb
+--2023-12-13 12:29:22--  https://dev.mysql.com/get/mysql-apt-config_0.8.24-1_all.deb
+Распознаётся dev.mysql.com (dev.mysql.com)... 184.51.238.43, 2001:2030:4f:89::2e31, 2001:2030:4f:a8::2e31
+Подключение к dev.mysql.com (dev.mysql.com)|184.51.238.43|:443... соединение установлено.
+HTTP-запрос отправлен. Ожидание ответа... 302 Moved Temporarily
+Адрес: https://repo.mysql.com//mysql-apt-config_0.8.24-1_all.deb [переход]
+--2023-12-13 12:29:22--  https://repo.mysql.com//mysql-apt-config_0.8.24-1_all.deb
+Распознаётся repo.mysql.com (repo.mysql.com)... 23.37.58.58, 2a02:26f0:1700:585::1d68, 2a02:26f0:1700:593::1d68
+Подключение к repo.mysql.com (repo.mysql.com)|23.37.58.58|:443... соединение установлено.
+HTTP-запрос отправлен. Ожидание ответа... 200 OK
+Длина: 18048 (18K) [application/x-debian-package]
+Сохранение в каталог: ««mysql-apt-config_0.8.24-1_all.deb»».
+
+mysql-apt-config_0.8.24-1_all 100%[=================================================>]  17,62K  --.-KB/s    in 0,001s  
+
+2023-12-13 12:29:23 (32,5 MB/s) - «mysql-apt-config_0.8.24-1_all.deb» сохранён [18048/18048]
+
+student@Ubuntu-MySQL-VirtualBox:~$ sudo dpkg -i mysql-apt-config_0.8.24-1_all.deb
+Выбор ранее не выбранного пакета mysql-apt-config.
+(Чтение базы данных … на данный момент установлено 260078 файлов и каталогов.)
+Подготовка к распаковке mysql-apt-config_0.8.24-1_all.deb …
+Распаковывается mysql-apt-config (0.8.24-1) …
+Настраивается пакет mysql-apt-config (0.8.24-1) …
+OK
+student@Ubuntu-MySQL-VirtualBox:~$ systemctl status mysql
+● mysql.service - MySQL Community Server
+   Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+   Active: active (running) since Ср 2023-12-13 12:15:39 MSK; 19min ago
+ Main PID: 1308 (mysqld)
+    Tasks: 28
+   Memory: 129.8M
+      CPU: 656ms
+   CGroup: /system.slice/mysql.service
+           └─1308 /usr/sbin/mysqld
+
+дек 13 12:15:31 Ubuntu-MySQL-VirtualBox systemd[1]: Starting MySQL Community Server...
+дек 13 12:15:39 Ubuntu-MySQL-VirtualBox systemd[1]: Started MySQL Community Server.
+student@Ubuntu-MySQL-VirtualBox:~$ wget https://dev.mysql.com/get/downloads/connector/python/mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb
+--2023-12-13 12:49:17--  https://dev.mysql.com/get/downloads/connector/python/mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb
+Распознаётся dev.mysql.com (dev.mysql.com)... 184.51.238.43, 2001:2030:4f:89::2e31, 2001:2030:4f:a8::2e31
+Подключение к dev.mysql.com (dev.mysql.com)|184.51.238.43|:443... соединение установлено.
+HTTP-запрос отправлен. Ожидание ответа... 302 Moved Temporarily
+Адрес: https://cdn.mysql.com//Downloads/Connector-Python/mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb [переход]
+--2023-12-13 12:49:17--  https://cdn.mysql.com//Downloads/Connector-Python/mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb
+Распознаётся cdn.mysql.com (cdn.mysql.com)... 184.51.230.241, 2001:2030:4f:80::1d68, 2001:2030:4f:a3::1d68
+Подключение к cdn.mysql.com (cdn.mysql.com)|184.51.230.241|:443... соединение установлено.
+HTTP-запрос отправлен. Ожидание ответа... 200 OK
+Длина: 2477760 (2,4M) [application/x-debian-package]
+Сохранение в каталог: ««mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb.1»».
+
+mysql-connector-python-py3_8.2.0-1ubu 100%[========================================================================>]   2,36M  10,5MB/s    in 0,2s    
+
+2023-12-13 12:49:18 (10,5 MB/s) - «mysql-connector-python-py3_8.2.0-1ubuntu23.10_amd64.deb.1» сохранён [2477760/2477760]
+
+student@Ubuntu-MySQL-VirtualBox:~$ sudo dpkg -i mysql-connector-j_8.0.32-1ubuntu22.04_all.deb
+Выбор ранее не выбранного пакета mysql-connector-j.
+(Чтение базы данных … на данный момент установлено 261106 файлов и каталогов.)
+Подготовка к распаковке mysql-connector-j_8.0.32-1ubuntu22.04_all.deb …
+Распаковывается mysql-connector-j (8.0.32-1ubuntu22.04) …
+Настраивается пакет mysql-connector-j (8.0.32-1ubuntu22.04) …
+student@Ubuntu-MySQL-VirtualBox:~$ sudo dpkg -r mysql-connector-j
+(Чтение базы данных … на данный момент установлено 261114 файлов и каталогов.)
+Удаляется mysql-connector-j (8.0.32-1ubuntu22.04) …
